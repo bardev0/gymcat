@@ -5,11 +5,8 @@ function readCSV(path: string): string {
   return rawData;
 }
 
-// console.log(process.cwd())
 const pathCsv = "workouts_to_enter.csv";
-const csvFile = readCSV(pathCsv);
-
-console.log(csvFile);
+let csvFile = readCSV(pathCsv);
 
 class Workout {
   date: string;
@@ -55,7 +52,26 @@ class Workout {
 }
 //split file into arrays with each indivdual workout being on object
 //remove whitespce characters
-// csvFile.replace(/\n/, "")
-// csvFile.replace(/\r/, "")
-// const workoutList = csvFile.split(/2{\d}/)
-console.log(csvFile)
+
+csvFile = csvFile.replace(/\s/gm, "")
+csvFile = csvFile.replace(/\n/gm, "")
+csvFile = csvFile.replace(/\r/gm, "")
+csvFile = csvFile + '00.00.0000'
+
+let trainingData = csvFile.split(/(?<=\d\d[\.]\d\d[\.]\d\d\d\d)(.*?)(?=\d\d[\.]\d\d[\.]\d\d\d\d)/gm)
+trainingData.pop()
+// array containing dates on even indexes and data on un-even indexes
+
+// console.log(trainingData[0]) // pure date of training 
+// console.log(trainingData[1]) // pure ALL DATA
+const startingDate = trainingData[1].match(/\d\d[\:]\d\d/g)
+// console.log(startingDate)
+// console.log(trainingData.length)
+
+for (let i = 0; i < trainingData.length ; i+=2 ) {
+		console.log('DATA ' + trainingData[i]); //startingDate
+
+		// rozdziel dane na poszczególne kategorie
+		console.log(trainingData[i+1])
+}
+
