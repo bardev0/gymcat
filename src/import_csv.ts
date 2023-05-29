@@ -9,7 +9,7 @@ const pathCsv = "workouts_to_enter.csv";
 let csvFile = readCSV(pathCsv);
 
 // trzeba podzielic workout od samych cwiczen
-
+// test nodemona
 interface IRow {
   repetitions: number;
   muscleGroup: string;
