@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"runServer": "pnpm exec tsc && node ./dist/server.js",
-		"runCVSimport": "pnpm exec tsc && node ./dist/import_csv.js"
+    "runServer": "pnpm exec tsc && node ./dist/server.js",
+    "runCVSimport": "pnpm exec tsc && node ./dist/import_csv.js"
   },
   "keywords": [],
   "author": "",

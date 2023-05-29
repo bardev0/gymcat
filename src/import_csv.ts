@@ -6,7 +6,7 @@ function readCSV(path: string): string {
 }
 
 // console.log(process.cwd())
-const pathCsv = 'workouts_to_enter.csv'
-const csvFile = readCSV(pathCsv)
+const pathCsv = "workouts_to_enter.csv";
+const csvFile = readCSV(pathCsv);
 
-console.log(csvFile)
+console.log(csvFile);
