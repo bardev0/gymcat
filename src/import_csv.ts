@@ -50,28 +50,37 @@ class Workout {
     this.rest = rest;
   }
 }
-//split file into arrays with each indivdual workout being on object
-//remove whitespce characters
 
-csvFile = csvFile.replace(/\s/gm, "")
-csvFile = csvFile.replace(/\n/gm, "")
-csvFile = csvFile.replace(/\r/gm, "")
-csvFile = csvFile + '00.00.0000'
+let regexDate = /(\d\d[\.]\d\d[\.]\d\d\d\d)/gm
 
-let trainingData = csvFile.split(/(?<=\d\d[\.]\d\d[\.]\d\d\d\d)(.*?)(?=\d\d[\.]\d\d[\.]\d\d\d\d)/gm)
-trainingData.pop()
-// array containing dates on even indexes and data on un-even indexes
+let dates = csvFile.match(regexDate)
+// console.log(dates)
 
-// console.log(trainingData[0]) // pure date of training 
-// console.log(trainingData[1]) // pure ALL DATA
-const startingDate = trainingData[1].match(/\d\d[\:]\d\d/g)
-// console.log(startingDate)
-// console.log(trainingData.length)
+let rows = csvFile.split("\n")
+let hours: Array<string> = []
 
-for (let i = 0; i < trainingData.length ; i+=2 ) {
-		console.log('DATA ' + trainingData[i]); //startingDate
+rows.forEach((row) => {
+	if (row.match(/\d\d[\:]\d\d/g)) {
+	// console.log(row)
+	hours.push(row)
+	}})
 
-		// rozdziel dane na poszczególne kategorie
-		console.log(trainingData[i+1])
-}
+// console.log(hours)
+let pureCSV = csvFile.replace(/\s/gm, ",")
+pureCSV = pureCSV + "00.00.0000,,,"
 
+// console.log(pureCSV) /
+let seriesRx = /(?<=total,,)(.+?)(?=\d\d[\.])/gm
+let serie = pureCSV.match(seriesRx)
+
+let decons: any = []
+let singleSei = []
+serie?.forEach((seria) => {
+	singleSei = seria.split(/[\,]/g)
+	decons.push(singleSei)
+	singleSei = []
+})
+
+console.table(decons[1])
+
+// jezeli index i+8 jest pusty to znaczy ze trzeba spierdalać
