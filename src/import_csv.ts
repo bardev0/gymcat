@@ -8,6 +8,7 @@ function readCSV(path: string): string {
 const pathCsv = "workouts_to_enter.csv";
 let csvFile = readCSV(pathCsv);
 
+// trzeba podzielic workout od samych cwiczen
 class Workout {
   date: string;
   timeStart: string;
@@ -51,36 +52,39 @@ class Workout {
   }
 }
 
-let regexDate = /(\d\d[\.]\d\d[\.]\d\d\d\d)/gm
+let regexDate = /(\d\d[\.]\d\d[\.]\d\d\d\d)/gm;
 
-let dates = csvFile.match(regexDate)
+let dates = csvFile.match(regexDate);
 // console.log(dates)
 
-let rows = csvFile.split("\n")
-let hours: Array<string> = []
+let rows = csvFile.split("\n");
+let hours: Array<string> = [];
 
 rows.forEach((row) => {
-	if (row.match(/\d\d[\:]\d\d/g)) {
-	// console.log(row)
-	hours.push(row)
-	}})
+  if (row.match(/\d\d[\:]\d\d/g)) {
+    // console.log(row)
+    hours.push(row);
+  }
+});
 
 // console.log(hours)
-let pureCSV = csvFile.replace(/\s/gm, ",")
-pureCSV = pureCSV + "00.00.0000,,,"
+let pureCSV = csvFile.replace(/\s/gm, ",");
+pureCSV = pureCSV + "00.00.0000,,,";
 
 // console.log(pureCSV) /
-let seriesRx = /(?<=total,,)(.+?)(?=\d\d[\.])/gm
-let serie = pureCSV.match(seriesRx)
+let seriesRx = /(?<=total,,)(.+?)(?=\d\d[\.])/gm;
+let serie = pureCSV.match(seriesRx);
 
-let decons: any = []
-let singleSei = []
+let decons: any = [];
+let singleSei = [];
 serie?.forEach((seria) => {
-	singleSei = seria.split(/[\,]/g)
-	decons.push(singleSei)
-	singleSei = []
-})
+  singleSei = seria.split(/[\,]/g);
+  decons.push(singleSei);
+  singleSei = [];
+});
 
-console.table(decons[1])
-
+decons.forEach( (wok: any) => {
+	wok.forEach((sig: any) => { console.log(sig) } )
+}
+)
 // jezeli index i+8 jest pusty to znaczy ze trzeba spierdalać
