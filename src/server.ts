@@ -39,3 +39,5 @@ app.get('/testExport', async (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`Server succesfully started on port : ${PORT} !`);
 });
+
+// push records to prisma
