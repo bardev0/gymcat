@@ -51,7 +51,7 @@ class Row implements IRow {
 }
 
 interface IWorkout {
-	workoutNumber: number;
+  workoutNumber: number;
   date: string;
   timeStart: string;
   timeEnd: string;
@@ -62,16 +62,21 @@ interface IWorkout {
 }
 
 class Workout implements IWorkout {
-	workoutNumber: number;
+  workoutNumber: number;
   date: string;
   timeStart: string;
   timeEnd: string;
   listOfRows: Array<IRow>;
   totalDay: number | undefined;
 
-  constructor(workNum:number, date: string, timeStart: string, timeEnd: string) {
-    this.workoutNumber = workNum
-		this.date = date;
+  constructor(
+    workNum: number,
+    date: string,
+    timeStart: string,
+    timeEnd: string
+  ) {
+    this.workoutNumber = workNum;
+    this.date = date;
     this.timeStart = timeStart;
     this.timeEnd = timeEnd;
     this.listOfRows = [];
@@ -108,26 +113,26 @@ onlyRows?.forEach((workout) => {
   let [hoursStart, hoursEnd] = currentHours.split(/\,/);
 
   let splitworkout = workout.split(/%%/g);
-  let tempWork = new Workout(c1,currentDate, hoursStart, hoursEnd);
+  let tempWork = new Workout(c1, currentDate, hoursStart, hoursEnd);
 
   splitworkout.forEach((row) => {
     let spitRow = row.split(/,/g);
     // check if any row is vaild
     let rowSerNum = parseInt(spitRow[0]) || 0;
     // console.log(rowSerNum);
-    if (rowSerNum != 0 ) {
-    let tempRow: IRow = new Row(
-      parseInt(spitRow[0]),
-      spitRow[1],
-      spitRow[2],
-      parseInt(spitRow[3]),
-      parseInt(spitRow[4]),
-      parseInt(spitRow[5])
-    );
-    tempWork.addRows(tempRow);
-		}
+    if (rowSerNum != 0) {
+      let tempRow: IRow = new Row(
+        parseInt(spitRow[0]),
+        spitRow[1],
+        spitRow[2],
+        parseInt(spitRow[3]),
+        parseInt(spitRow[4]),
+        parseInt(spitRow[5])
+      );
+      tempWork.addRows(tempRow);
+    }
   });
-	// debugger;
+  // debugger;
   allWorkouts.push(tempWork);
   c1++;
 });
@@ -135,6 +140,5 @@ onlyRows?.forEach((workout) => {
 // console.log(allWorkouts[0].listOfRows);
 // console.log(allWorkouts);
 
-console.log(allWorkouts)
+console.log(allWorkouts);
 // debugger;
-
