@@ -1,3 +1,4 @@
+// debugger;
 import * as fs from "fs";
 
 function readCSV(path: string): string {
@@ -126,10 +127,14 @@ onlyRows?.forEach((workout) => {
     tempWork.addRows(tempRow);
 		}
   });
+	// debugger;
   allWorkouts.push(tempWork);
   c1++;
 });
 
 // console.log(allWorkouts[0].listOfRows);
 // console.log(allWorkouts);
+
 console.log(allWorkouts)
+// debugger;
+
