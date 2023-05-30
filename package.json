@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"watchServer": "nodemon ./src/server.ts",
-		"watchCSVimport":"nodemon ./src/import_csv.ts",
+    "watchServer": "nodemon ./src/server.ts",
+    "watchCSVimport": "nodemon ./src/import_csv.ts",
     "runServer": "pnpm exec tsc && node ./dist/server.js",
     "runCSVimport": "pnpm exec tsc && node ./dist/import_csv.js"
   },

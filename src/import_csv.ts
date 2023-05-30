@@ -8,6 +8,8 @@ function readCSV(path: string): string {
 const pathCsv = "workouts_to_enter.csv";
 let csvFile = readCSV(pathCsv);
 
+let dbOfWorkouts: Array<IWorkout>;
+
 // trzeba podzielic workout od samych cwiczen
 // test nodemona
 interface IRow {
@@ -61,7 +63,15 @@ class Seria implements ISeria {
   }
 }
 
-class Workout {
+interface IWorkout {
+  date: string;
+  timeStart: string;
+  timeEnd: string;
+  totalDay: number | undefined;
+  listaSerii: Array<ISeria>;
+}
+
+class Workout implements IWorkout {
   date: string;
   timeStart: string;
   timeEnd: string;
@@ -97,34 +107,32 @@ csvInRows.forEach((row) => {
   }
 });
 
-console.log(hours);
+// console.log(hours);
 
+let pureCSV = csvFile.replace(/\s/gm, "%");
+pureCSV = pureCSV + "%%00.00.0000,,,";
 
-// co jezeli jestem w stanie podzielic rows ze
-// jump to new row jezeli numer serii jest mniejszy niz poprzeni numer
-let pureCSV = csvFile.replace(/\s/gm, ",");
-pureCSV = pureCSV + "00.00.0000,,,";
-let wszystkieSerie = /(?<=total,,)(.+?)(?=\d\d[\.])/gm;
-let formatedSerie = pureCSV.match(wszystkieSerie);
+let onlyRows = pureCSV.match(/(?<=total%%)(.*?)(?=%%\d\d[\.])/g);
 
-let workout: any = [];
-let singleSei: any = [];
-formatedSerie?.forEach((ser) => {
-  singleSei = ser.split(/[\,]/g);
-  workout.push(singleSei);
-  singleSei = [];
+let wholeWorkouts = [];
+// console.log(onlyRows)
+onlyRows?.forEach((workout) => {
+  let splitworkout = workout.split(/%%/g);
+  let tempSeries = [];
+  // console.log(splitworkout)
+  splitworkout.forEach((row) => {
+    let spitRow = row.split(/,/g);
+
+		// TODO : DODAJ PODZIELENIE NA SERIE ZALEZNIE OD NUMERU SERII
+    let tempRow: IRow = new Row(
+      parseInt(spitRow[0]),
+      spitRow[1],
+      spitRow[2],
+      parseInt(spitRow[3]),
+      parseInt(spitRow[4]),
+      parseInt(spitRow[5])
+    );
+
+    tempSeries.push(tempRow);
+  });
 });
-
-// kazdy index nastepuje w odstepach co 9 !
-console.log(workout[13][0])
-console.log(workout[13][9])
-console.log(workout[13][1])
-console.log(workout[13][10])
-
-workout.forEach(( dane:any ) => { console.log(dane)})
-/** tesing clases
-let row = new Row(1,"biceps","dumbbell curls",2,10,12)
-let seria1 = new Seria()
-seria1.addRow(row)
-
-console.log(seria1) */
