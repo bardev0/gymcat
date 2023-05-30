@@ -8,10 +8,6 @@ function readCSV(path: string): string {
 const pathCsv = "workouts_to_enter.csv";
 let csvFile = readCSV(pathCsv);
 
-let dbOfWorkouts: Array<IWorkout>;
-
-// trzeba podzielic workout od samych cwiczen
-// test nodemona
 interface IRow {
   repetitions: number;
   muscleGroup: string;
@@ -21,6 +17,7 @@ interface IRow {
   weight: number;
   totalExercise: number;
 }
+
 class Row implements IRow {
   repetitions: number;
   muscleGroup: string;
@@ -44,55 +41,45 @@ class Row implements IRow {
     this.exerciseMultiplier = exerciseMultiplier;
     this.seriesNumber = seriesNumber;
     this.weight = weight;
-    this.totalExercise = 0;
-  }
-}
-
-interface ISeria {
-  csvInRows: Array<IRow>;
-}
-class Seria implements ISeria {
-  csvInRows: Array<IRow>;
-
-  constructor() {
-    this.csvInRows = [];
+    this.totalExercise = this.calcTotal();
   }
 
-  addRow(row: IRow) {
-    this.csvInRows.push(row);
+  calcTotal() {
+    return this.exerciseMultiplier * (this.repetitions * this.weight);
   }
 }
 
 interface IWorkout {
+	workoutNumber: number;
   date: string;
   timeStart: string;
   timeEnd: string;
+  listOfRows: Array<IRow>;
   totalDay: number | undefined;
-  listaSerii: Array<ISeria>;
+
+  addRows: Function;
 }
 
 class Workout implements IWorkout {
+	workoutNumber: number;
   date: string;
   timeStart: string;
   timeEnd: string;
+  listOfRows: Array<IRow>;
   totalDay: number | undefined;
-  listaSerii: Array<ISeria>;
 
-  constructor(
-    date: string,
-    timeStart: string,
-    timeEnd: string,
-    totalDay: number
-  ) {
-    this.date = date;
+  constructor(workNum:number, date: string, timeStart: string, timeEnd: string) {
+    this.workoutNumber = workNum
+		this.date = date;
     this.timeStart = timeStart;
     this.timeEnd = timeEnd;
-    this.totalDay = totalDay;
-    this.listaSerii = [];
+    this.listOfRows = [];
+    this.totalDay = 0;
   }
 
-  addSeries(obj: ISeria) {
-    this.listaSerii.push(obj);
+  addRows(obj: any) {
+    this.listOfRows.push(obj);
+    this.totalDay = this.totalDay + obj.totalExercise;
   }
 }
 let regexDate = /(\d\d[\.]\d\d[\.]\d\d\d\d)/gm;
@@ -107,23 +94,27 @@ csvInRows.forEach((row) => {
   }
 });
 
-// console.log(hours);
+let pureStringCsv = csvFile.replace(/\s/gm, "%");
+pureStringCsv = pureStringCsv + "%%00.00.0000,,,";
 
-let pureCSV = csvFile.replace(/\s/gm, "%");
-pureCSV = pureCSV + "%%00.00.0000,,,";
+let onlyRows = pureStringCsv.match(/(?<=total%%)(.*?)(?=%%\d\d[\.])/g);
 
-let onlyRows = pureCSV.match(/(?<=total%%)(.*?)(?=%%\d\d[\.])/g);
-
-let wholeWorkouts = [];
-// console.log(onlyRows)
+let allWorkouts: Array<IWorkout> = [];
+let c1 = 0;
 onlyRows?.forEach((workout) => {
+  let currentDate = dates![c1];
+  let currentHours = hours![c1];
+  let [hoursStart, hoursEnd] = currentHours.split(/\,/);
+
   let splitworkout = workout.split(/%%/g);
-  let tempSeries = [];
-  // console.log(splitworkout)
+  let tempWork = new Workout(c1,currentDate, hoursStart, hoursEnd);
+
   splitworkout.forEach((row) => {
     let spitRow = row.split(/,/g);
-
-		// TODO : DODAJ PODZIELENIE NA SERIE ZALEZNIE OD NUMERU SERII
+    // check if any row is vaild
+    let rowSerNum = parseInt(spitRow[0]) || 0;
+    // console.log(rowSerNum);
+    if (rowSerNum != 0 ) {
     let tempRow: IRow = new Row(
       parseInt(spitRow[0]),
       spitRow[1],
@@ -132,7 +123,13 @@ onlyRows?.forEach((workout) => {
       parseInt(spitRow[4]),
       parseInt(spitRow[5])
     );
-
-    tempSeries.push(tempRow);
+    tempWork.addRows(tempRow);
+		}
   });
+  allWorkouts.push(tempWork);
+  c1++;
 });
+
+// console.log(allWorkouts[0].listOfRows);
+// console.log(allWorkouts);
+console.log(allWorkouts)
