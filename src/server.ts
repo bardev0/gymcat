@@ -4,7 +4,7 @@ import process = require("process");
 import * as dotenv from "dotenv";
 
 import { PrismaClient } from "@prisma/client";
-
+import { transformCSV, readCSV } from "./import_csv";
 dotenv.config();
 const PORT = process.env.SERVER_PORT;
 const app = express();
@@ -29,6 +29,12 @@ app.get("/addUser", (req: Request, res: Response) => {
     await prisma.$disconnect();
   });
 });
+
+app.get('/testExport', async (req: Request, res: Response) => {
+	res.send('ok')
+	console.log(process.cwd())
+	console.log(transformCSV(readCSV("./workouts_to_enter.csv")))
+})
 
 app.listen(PORT, () => {
   console.log(`Server succesfully started on port : ${PORT} !`);
