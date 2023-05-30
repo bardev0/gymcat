@@ -31,9 +31,9 @@ app.get("/addUser", (req: Request, res: Response) => {
 });
 
 app.get('/testExport', async (req: Request, res: Response) => {
-	res.send('ok')
-	console.log(process.cwd())
 	console.log(transformCSV(readCSV("./workouts_to_enter.csv")))
+	res.send(transformCSV(readCSV("./workouts_to_enter.csv")))
+
 })
 
 app.listen(PORT, () => {
