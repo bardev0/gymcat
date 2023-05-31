@@ -4,7 +4,7 @@ import process = require("process");
 import * as dotenv from "dotenv";
 import { transformCSV, readCSV } from "./import_csv";
 import { MongoClient } from "mongodb";
-
+import cors = require('cors')
 const uri =
   "mongodb+srv://greg1111:Rgbi5QPJQCck3eox@cluster0.nsckr5l.mongodb.net/Cluester0";
 const client = new MongoClient(uri);
@@ -12,6 +12,8 @@ const client = new MongoClient(uri);
 dotenv.config();
 const PORT = process.env.SERVER_PORT;
 const app = express();
+app.use(cors<Request>())
+app.use(express.json())
 
 let legacyWorkouts = transformCSV(readCSV("./workouts_to_enter.csv"));
 
@@ -30,11 +32,11 @@ async function addLegacyWorkouts(multipleWorkouts: any) {
   }
 }
 
-async function addUser(userName: string, userPassw: string, dateOfBirth: Date) {
+async function addUser(userName: string, userPassw: string) {
   try {
     const database = client.db("Cluester0");
     const users = database.collection("Users");
-    const user1 = { name: userName, pass: userPassw, dateOfBirth: dateOfBirth };
+    const user1 = { name: userName, pass: userPassw};
 
     const result = await users.insertOne(user1);
     console.log(result);
@@ -43,16 +45,20 @@ async function addUser(userName: string, userPassw: string, dateOfBirth: Date) {
   }
 }
 
-app.get("/addUser", (req: Request, res: Response) => {
+app.post("/addUser", (req: Request, res: Response) => {
   // place to use Interface
   // workout different time parsings
   try {
-    let tempDate = new Date(1992, 5 - 1, 11 + 1);
-    addUser("greg", "dabrowski", tempDate);
+    addUser(req.body.name, req.body.pass);
   } finally {
     res.send("user added");
+		console.log(req.body.name + " " + req.body.pass )
   }
 });
+/** returns response if user exist in database */
+app.post("/login", () => {}
+
+				)
 
 app.get("/test", (req: Request, res: Response) => {
   console.log(`endpoint /test reached !`);
@@ -78,3 +84,4 @@ app.listen(PORT, () => {
 });
 
 // export types to separate file and add them to this
+// add hashing of passwords
