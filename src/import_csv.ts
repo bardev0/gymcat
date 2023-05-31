@@ -133,11 +133,10 @@ function transformCSV(csv: string): Array<IWorkout> {
     c1++;
   });
 
-	return allWorkouts
+  return allWorkouts;
 }
-
 
 // let output = transformCSV(csvFile)
 // console.log(output)
 
-export { transformCSV, readCSV }
+export { transformCSV, readCSV };
