@@ -19,17 +19,16 @@ async function addLegacyWorkouts(multipleWorkouts: any) {
   try {
     const database = client.db("Cluester0");
     const users = database.collection("Workouts2");
-		const options = { ordered: true }     // this option prevents additional documents from being inserted if one fails
+    const options = { ordered: true }; // this option prevents additional documents from being inserted if one fails
 
     const query = multipleWorkouts;
 
-		const result = await users.insertMany(multipleWorkouts, options)
-		console.log(result)
+    const result = await users.insertMany(multipleWorkouts, options);
+    console.log(result);
   } finally {
     await client.close();
   }
 }
-
 
 app.get("/test", (req: Request, res: Response) => {
   console.log(`endpoint /test reached !`);
@@ -38,14 +37,12 @@ app.get("/test", (req: Request, res: Response) => {
 
 app.get("/addLegacyWorkouts", (req: Request, res: Response) => {
   try {
-		addLegacyWorkouts(legacyWorkouts)
-      } finally {
+    addLegacyWorkouts(legacyWorkouts);
+  } finally {
     res.send("ok");
-		console.log('ok')
+    console.log("ok");
   }
 });
-
-app
 
 app.get("/testExport", async (req: Request, res: Response) => {
   console.log(transformCSV(readCSV("./workouts_to_enter.csv")));
