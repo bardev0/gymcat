@@ -4,7 +4,8 @@ import process = require("process");
 import * as dotenv from "dotenv";
 import { transformCSV, readCSV } from "./import_csv";
 import { MongoClient } from "mongodb";
-import cors = require('cors')
+import cors = require("cors");
+import bcrypt from "bcrypt";
 const uri =
   "mongodb+srv://greg1111:Rgbi5QPJQCck3eox@cluster0.nsckr5l.mongodb.net/Cluester0";
 const client = new MongoClient(uri);
@@ -12,8 +13,8 @@ const client = new MongoClient(uri);
 dotenv.config();
 const PORT = process.env.SERVER_PORT;
 const app = express();
-app.use(cors<Request>())
-app.use(express.json())
+app.use(cors<Request>());
+app.use(express.json());
 
 let legacyWorkouts = transformCSV(readCSV("./workouts_to_enter.csv"));
 
@@ -36,7 +37,7 @@ async function addUser(userName: string, userPassw: string) {
   try {
     const database = client.db("Cluester0");
     const users = database.collection("Users");
-    const user1 = { name: userName, pass: userPassw};
+    const user1 = { name: userName, pass: userPassw };
 
     const result = await users.insertOne(user1);
     console.log(result);
@@ -46,19 +47,42 @@ async function addUser(userName: string, userPassw: string) {
 }
 
 app.post("/addUser", (req: Request, res: Response) => {
-  // place to use Interface
+  // place to use Interfac
   // workout different time parsings
   try {
-    addUser(req.body.name, req.body.pass);
+    addUser(req.body.name, req.body.password);
   } finally {
     res.send("user added");
-		console.log(req.body.name + " " + req.body.pass )
+    console.log(req.body.name + " " + req.body.password);
   }
 });
-/** returns response if user exist in database */
-app.post("/login", () => {}
 
-				)
+app.post("/login", async (req, res) => {
+  try {
+    let username = req.body.name;
+    let pass = req.body.pass;
+    console.log(username + " " + pass);
+    const database = client.db("Cluester0");
+    const users = database.collection("Users");
+
+    const ifUserExists = await users.findOne({ name: username }).then((obj) => {
+      console.log(obj);
+      if (obj == null) {
+        res.send({ loginStatus: "no user" });
+      } else {
+        bcrypt.compare(username, obj?.pass, (err, result) => {
+          console.log(result);
+          if (result) {
+            res.send({ loginStatus: "logged in" });
+          } else {
+            res.send({ loginStatus: "wrong password" });
+          }
+        });
+      }
+    });
+  } finally {
+  }
+});
 
 app.get("/test", (req: Request, res: Response) => {
   console.log(`endpoint /test reached !`);
@@ -84,4 +108,7 @@ app.listen(PORT, () => {
 });
 
 // export types to separate file and add them to this
-// add hashing of passwords
+// add error when username exist when creating a new user
+//
+
+// hash from loginBox and Register are different
