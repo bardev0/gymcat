@@ -73,7 +73,8 @@ app.post("/login", async (req, res) => {
         bcrypt.compare(username, obj?.pass, (err, result) => {
           console.log(result);
           if (result) {
-            res.send({ loginStatus: "logged in" });
+						// do a mongoquery to return all workouts with username as name
+            res.send({ loginStatus: "logged in",  });
           } else {
             res.send({ loginStatus: "wrong password" });
           }
