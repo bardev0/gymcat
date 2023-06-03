@@ -18,6 +18,20 @@ app.use(express.json());
 
 let legacyWorkouts = transformCSV(readCSV("./workouts_to_enter.csv"));
 
+// add username for furure usage
+async function queryAllUserWorkouts() {
+		try {
+    const database = client.db("Cluester0");
+    const workouts = database.collection("Workouts2");
+		const query = { totalDay: { $gt: 2000 }}
+		const result = await workouts.find(query).toArray()
+		
+		console.log(result)
+		}
+		finally {
+		}
+}
+
 async function addLegacyWorkouts(multipleWorkouts: any) {
   try {
     const database = client.db("Cluester0");
@@ -90,6 +104,7 @@ app.get("/test", (req: Request, res: Response) => {
   res.send("endpoint available");
 });
 
+// have to add username for each workout
 app.get("/addLegacyWorkouts", (req: Request, res: Response) => {
   try {
     addLegacyWorkouts(legacyWorkouts);
@@ -98,6 +113,11 @@ app.get("/addLegacyWorkouts", (req: Request, res: Response) => {
     console.log("ok");
   }
 });
+
+app.get("/findWorkouts", (req: Request, res: Response) => {
+	queryAllUserWorkouts()
+	res.send('ok')
+})
 
 app.get("/testExport", async (req: Request, res: Response) => {
   console.log(transformCSV(readCSV("./workouts_to_enter.csv")));
