@@ -16,7 +16,8 @@ const app = express();
 app.use(cors<Request>());
 app.use(express.json());
 
-let legacyWorkouts = transformCSV(readCSV("./workouts_to_enter.csv"));
+let legacyUsername: string = 'greg'
+let legacyWorkouts = transformCSV(legacyUsername, readCSV("./workouts_to_enter.csv"));
 
 // add username for furure usage
 async function queryAllUserWorkouts() {
@@ -120,8 +121,8 @@ app.get("/findWorkouts", (req: Request, res: Response) => {
 })
 
 app.get("/testExport", async (req: Request, res: Response) => {
-  console.log(transformCSV(readCSV("./workouts_to_enter.csv")));
-  res.send(transformCSV(readCSV("./workouts_to_enter.csv")));
+  console.log(transformCSV(legacyUsername, readCSV("./workouts_to_enter.csv")));
+  res.send(transformCSV(legacyUsername, readCSV("./workouts_to_enter.csv")));
 });
 
 app.listen(PORT, () => {
