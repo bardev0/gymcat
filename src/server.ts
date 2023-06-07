@@ -48,11 +48,11 @@ async function addLegacyWorkouts(multipleWorkouts: any) {
   }
 }
 
-async function addUser(userName: string, userPassw: string) {
+async function addUser(userName: string, userPassw: string, userEmail: string) {
   try {
     const database = client.db("Cluester0");
     const users = database.collection("Users");
-    const user1 = { name: userName, pass: userPassw };
+    const user1 = { name: userName, pass: userPassw, email: userEmail};
 
     const result = await users.insertOne(user1);
     console.log(result);
@@ -64,8 +64,10 @@ async function addUser(userName: string, userPassw: string) {
 app.post("/addUser", (req: Request, res: Response) => {
   // place to use Interfac
   // workout different time parsings
+	
+	// check if user exists
   try {
-    addUser(req.body.name, req.body.password);
+    addUser(req.body.name, req.body.password, req.body.email);
   } finally {
     res.send("user added");
     console.log(req.body.name + " " + req.body.password);
