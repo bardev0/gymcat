@@ -6,7 +6,7 @@ import { transformCSV, readCSV } from "./import_csv";
 import { MongoClient } from "mongodb";
 import cors = require("cors");
 import bcrypt from "bcrypt";
-
+import logic from "./logic";
 // move all non-path functions to separe file
 
 const uri =
@@ -79,17 +79,39 @@ app.post("/addUser", (req: Request, res: Response) => {
   }
 });
 
-app.post("/addTemplateExercisie", (req, res) => {
+app.post("/addTemplateExercise", (req, res) => {
   console.log("endpoint temp exerc reached");
   try {
+    let exerc1 = {
+      muscleG: req.body.mg,
+      exerc: req.body.e,
+    };
+    console.log(exerc1);
+    logic.addTemplateExercise(exerc1);
   } finally {
     res.send("endpoint temp exerc reached");
+  }
+});
+
+app.post("/exportExercices", async (req, res) => {
+  try {
+    // retrive all exercices from db
+    console.log(await logic.grabExercic());
+  } finally {
+    res.send(await logic.grabExercic());
   }
 });
 
 app.post("/addSpcificUserTemplateExercise", (req, res) => {
   console.log("endpoint temp exerc reached");
   try {
+    let exerc2 = {
+      user: req.body.user,
+      muscleG: req.body.mg,
+      exerc: req.body.e,
+    };
+
+    logic.addUserExercisce(exerc2);
   } finally {
     res.send("endpoint temp exerc reached");
   }
