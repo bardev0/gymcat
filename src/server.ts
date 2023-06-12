@@ -6,6 +6,9 @@ import { transformCSV, readCSV } from "./import_csv";
 import { MongoClient } from "mongodb";
 import cors = require("cors");
 import bcrypt from "bcrypt";
+
+// move all non-path functions to separe file
+
 const uri =
   "mongodb+srv://greg1111:Rgbi5QPJQCck3eox@cluster0.nsckr5l.mongodb.net/Cluester0";
 const client = new MongoClient(uri);
@@ -16,21 +19,23 @@ const app = express();
 app.use(cors<Request>());
 app.use(express.json());
 
-let legacyUsername: string = 'greg'
-let legacyWorkouts = transformCSV(legacyUsername, readCSV("./workouts_to_enter.csv"));
+let legacyUsername: string = "greg";
+let legacyWorkouts = transformCSV(
+  legacyUsername,
+  readCSV("./workouts_to_enter.csv")
+);
 
 // add username for furure usage
 async function queryAllUserWorkouts() {
-		try {
+  try {
     const database = client.db("Cluester0");
     const workouts = database.collection("Workouts2");
-		const query = { totalDay: { $gt: 2000 }}
-		const result = await workouts.find(query).toArray()
-		
-		console.log(result)
-		}
-		finally {
-		}
+    const query = { totalDay: { $gt: 2000 } };
+    const result = await workouts.find(query).toArray();
+
+    console.log(result);
+  } finally {
+  }
 }
 
 async function addLegacyWorkouts(multipleWorkouts: any) {
@@ -52,7 +57,7 @@ async function addUser(userName: string, userPassw: string, userEmail: string) {
   try {
     const database = client.db("Cluester0");
     const users = database.collection("Users");
-    const user1 = { name: userName, pass: userPassw, email: userEmail};
+    const user1 = { name: userName, pass: userPassw, email: userEmail };
 
     const result = await users.insertOne(user1);
     console.log(result);
@@ -64,13 +69,29 @@ async function addUser(userName: string, userPassw: string, userEmail: string) {
 app.post("/addUser", (req: Request, res: Response) => {
   // place to use Interfac
   // workout different time parsings
-	
-	// check if user exists
+
+  // check if user exists
   try {
     addUser(req.body.name, req.body.password, req.body.email);
   } finally {
     res.send("user added");
     console.log(req.body.name + " " + req.body.password);
+  }
+});
+
+app.post("/addTemplateExercisie", (req, res) => {
+  console.log("endpoint temp exerc reached");
+  try {
+  } finally {
+    res.send("endpoint temp exerc reached");
+  }
+});
+
+app.post("/addSpcificUserTemplateExercise", (req, res) => {
+  console.log("endpoint temp exerc reached");
+  try {
+  } finally {
+    res.send("endpoint temp exerc reached");
   }
 });
 
@@ -90,8 +111,8 @@ app.post("/login", async (req, res) => {
         bcrypt.compare(username, obj?.pass, (err, result) => {
           console.log(result);
           if (result) {
-						// do a mongoquery to return all workouts with username as name
-            res.send({ loginStatus: "logged in",  });
+            // do a mongoquery to return all workouts with username as name
+            res.send({ loginStatus: "logged in" });
           } else {
             res.send({ loginStatus: "wrong password" });
           }
@@ -118,9 +139,9 @@ app.get("/addLegacyWorkouts", (req: Request, res: Response) => {
 });
 
 app.get("/findWorkouts", (req: Request, res: Response) => {
-	queryAllUserWorkouts()
-	res.send('ok')
-})
+  queryAllUserWorkouts();
+  res.send("ok");
+});
 
 app.get("/testExport", async (req: Request, res: Response) => {
   console.log(transformCSV(legacyUsername, readCSV("./workouts_to_enter.csv")));

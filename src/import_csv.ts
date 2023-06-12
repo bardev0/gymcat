@@ -50,7 +50,7 @@ class Row implements IRow {
 }
 
 interface IWorkout {
-	workoutOwner: string;
+  workoutOwner: string;
   workoutNumber: number;
   date: string;
   timeStart: string;
@@ -62,7 +62,7 @@ interface IWorkout {
 }
 
 class Workout implements IWorkout {
-	workoutOwner: string
+  workoutOwner: string;
   workoutNumber: number;
   date: string;
   timeStart: string;
@@ -71,13 +71,13 @@ class Workout implements IWorkout {
   totalDay: number | undefined;
 
   constructor(
-		workoutOwner: string,
+    workoutOwner: string,
     workNum: number,
     date: string,
     timeStart: string,
     timeEnd: string
   ) {
-		this.workoutOwner = workoutOwner;
+    this.workoutOwner = workoutOwner;
     this.workoutNumber = workNum;
     this.date = date;
     this.timeStart = timeStart;
@@ -117,7 +117,13 @@ function transformCSV(workoutUser: any, csv: string): Array<IWorkout> {
     let currentHours = hours![c1];
     let [hoursStart, hoursEnd] = currentHours.split(/\,/);
     let splitworkout = workout.split(/%%/g);
-    let tempWork = new Workout(workoutUser, c1, currentDate, hoursStart, hoursEnd);
+    let tempWork = new Workout(
+      workoutUser,
+      c1,
+      currentDate,
+      hoursStart,
+      hoursEnd
+    );
     splitworkout.forEach((row) => {
       let spitRow = row.split(/,/g);
       let rowSerNum = parseInt(spitRow[0]) || 0;
