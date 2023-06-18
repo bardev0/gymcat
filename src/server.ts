@@ -69,12 +69,12 @@ async function addUser(userName: string, userPassw: string, userEmail: string) {
 
 app.post(routes[0], (req: Request, res: Response) => {
   try {
-		console.log(req.body.user)
-		logic.addWorkout({
-			user: req.body.user
-		})
+		console.log(req.body)
+		// logic.addWorkout({ 
+		// user: req.body.user})
+		
   } finally {
-		res.send("workout added!")
+		res.json({status: "ok"})
   }
 });
 
