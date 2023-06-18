@@ -48,12 +48,21 @@ async function grabExercic() {
     allE.push(result);
   });
 
-  return allE
+  return allE;
+}
+
+async function addWorkout(workout: any) {
+  const database = client.db("Cluester0");
+  const col = database.collection("Workouts");
+	const result = await col.insertOne(workout)
+
+	console.log(result)
 }
 
 const logic = {
   addUserExercisce,
   addTemplateExercise,
   grabExercic,
+	addWorkout
 };
 export default logic;

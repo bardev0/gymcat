@@ -25,6 +25,7 @@ let legacyWorkouts = transformCSV(
   readCSV("./workouts_to_enter.csv")
 );
 
+const routes = ["/addWorkout", "/addUser"];
 // add username for furure usage
 async function queryAllUserWorkouts() {
   try {
@@ -66,7 +67,18 @@ async function addUser(userName: string, userPassw: string, userEmail: string) {
   }
 }
 
-app.post("/addUser", (req: Request, res: Response) => {
+app.post(routes[0], (req: Request, res: Response) => {
+  try {
+		console.log(req.body.user)
+		logic.addWorkout({
+			user: req.body.user
+		})
+  } finally {
+		res.send("workout added!")
+  }
+});
+
+app.post(routes[1], (req: Request, res: Response) => {
   // place to use Interfac
   // workout different time parsings
 
