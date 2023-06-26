@@ -1,3 +1,3 @@
-to-do :
-
-add workout name to workout classs
+# About
+# Roadmap
+# to-do's
