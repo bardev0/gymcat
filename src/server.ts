@@ -22,7 +22,7 @@ app.use(express.json());
 let legacyUsername: string = "greg";
 let legacyWorkouts = transformCSV(
   legacyUsername,
-  readCSV("./workouts_to_enter.csv")
+  readCSV("./222.csv")
 );
 
 const routes = ["/addWorkout", "/addUser", "/validateUser", "/retriveUserWorkouts"];
