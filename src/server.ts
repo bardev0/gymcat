@@ -38,6 +38,17 @@ async function queryAllUserWorkouts() {
   } finally {
   }
 }
+async function validateUser(username: string) {
+  try {
+    const database = client.db("Cluester0");
+    const workouts = database.collection("Users");
+    const query = { totalDay: { $gt: 2000 } };
+    const result = await workouts.find(query).toArray();
+
+    console.log(result);
+  } finally {
+  }
+}
 
 async function addLegacyWorkouts(multipleWorkouts: any) {
   try {
