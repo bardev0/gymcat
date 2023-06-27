@@ -25,7 +25,7 @@ let legacyWorkouts = transformCSV(
   readCSV("./workouts_to_enter.csv")
 );
 
-const routes = ["/addWorkout", "/addUser", "/validateUser"];
+const routes = ["/addWorkout", "/addUser", "/validateUser", "/retriveUserWorkouts"];
 // add username for furure usage
 async function queryAllUserWorkouts() {
   try {
@@ -51,7 +51,7 @@ async function validateUser(username: string) {
 async function addLegacyWorkouts(multipleWorkouts: any) {
   try {
     const database = client.db("Cluester0");
-    const workouts = database.collection("Workouts2");
+    const workouts = database.collection("Workouts");
     const options = { ordered: true }; // this option prevents additional documents from being inserted if one fails
 
     const query = multipleWorkouts;
@@ -76,6 +76,24 @@ async function addUser(userName: string, userPassw: string, userEmail: string) {
   }
 }
 
+// todo : specify correct collection
+async function grabUserWorkouts(user: string) {
+	const re = new RegExp(`${user}`)
+	const database = client.db("Cluester0");
+	const workouts = database.collection("Workouts")
+	const query = { workoutOwner: {$regex : re} }
+
+	const result = await workouts.find(query).toArray()
+	console.log(result)
+	return await result
+}
+
+app.post(routes[3], async (req: Request, res: Response) => {
+	console.log(req.body.user)
+	const allUserWorkouts = await grabUserWorkouts(req.body.user)
+	res.send(allUserWorkouts)
+})
+
 app.post(routes[0], (req: Request, res: Response) => {
   try {
     console.log(req.body);
@@ -86,13 +104,12 @@ app.post(routes[0], (req: Request, res: Response) => {
   }
 });
 
-app.get(routes[2], async (req: Request, res: Response) => {
-  let result
+app.post(routes[2], async (req: Request, res: Response) => {
 	validateUser(req.body.user).then((r) => {
-    if (r.length == 1) {
-			res.send(true)
+    if (r.length == 0) {
+			res.json({doesUserExist : false})
     } else {
-			res.send(false)
+			res.json({doesUserExist: true})
 		}
   });
 });
