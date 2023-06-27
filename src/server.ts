@@ -25,7 +25,7 @@ let legacyWorkouts = transformCSV(
   readCSV("./workouts_to_enter.csv")
 );
 
-const routes = ["/addWorkout", "/addUser"];
+const routes = ["/addWorkout", "/addUser", "/validateUser"];
 // add username for furure usage
 async function queryAllUserWorkouts() {
   try {
@@ -39,15 +39,13 @@ async function queryAllUserWorkouts() {
   }
 }
 async function validateUser(username: string) {
-  try {
-    const database = client.db("Cluester0");
-    const workouts = database.collection("Users");
-    const query = { totalDay: { $gt: 2000 } };
-    const result = await workouts.find(query).toArray();
-
-    console.log(result);
-  } finally {
-  }
+  const re = new RegExp(`${username}`);
+  console.log(re);
+  const database = client.db("Cluester0");
+  const workouts = database.collection("Users");
+  const query = { name: { $regex: re } };
+  const result = await workouts.find(query).toArray();
+  return result;
 }
 
 async function addLegacyWorkouts(multipleWorkouts: any) {
@@ -80,13 +78,23 @@ async function addUser(userName: string, userPassw: string, userEmail: string) {
 
 app.post(routes[0], (req: Request, res: Response) => {
   try {
-		console.log(req.body)
-		// logic.addWorkout({ 
-		// user: req.body.user})
-		
+    console.log(req.body);
+    // logic.addWorkout({
+    // user: req.body.user})
   } finally {
-		res.json({status: "ok"})
+    res.json({ status: "ok" });
   }
+});
+
+app.get(routes[2], async (req: Request, res: Response) => {
+  let result
+	validateUser(req.body.user).then((r) => {
+    if (r.length == 1) {
+			res.send(true)
+    } else {
+			res.send(false)
+		}
+  });
 });
 
 app.post(routes[1], (req: Request, res: Response) => {

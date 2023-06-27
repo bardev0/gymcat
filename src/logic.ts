@@ -54,15 +54,15 @@ async function grabExercic() {
 async function addWorkout(workout: any) {
   const database = client.db("Cluester0");
   const col = database.collection("Workouts");
-	const result = await col.insertOne(workout)
+  const result = await col.insertOne(workout);
 
-	console.log(result)
+  console.log(result);
 }
 
 const logic = {
   addUserExercisce,
   addTemplateExercise,
   grabExercic,
-	addWorkout
+  addWorkout,
 };
 export default logic;
