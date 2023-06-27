@@ -22,7 +22,7 @@ app.use(express.json());
 let legacyUsername: string = "greg";
 let legacyWorkouts = transformCSV(
   legacyUsername,
-  readCSV("./222.csv")
+  readCSV("./workouts_to_enter.csv")
 );
 
 const routes = ["/addWorkout", "/addUser", "/validateUser", "/retriveUserWorkouts"];
@@ -96,9 +96,9 @@ app.post(routes[3], async (req: Request, res: Response) => {
 
 app.post(routes[0], (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-    // logic.addWorkout({
-    // user: req.body.user})
+    // console.log(req.body);
+    logic.addWorkout({
+    user: req.body.user})
   } finally {
     res.json({ status: "ok" });
   }

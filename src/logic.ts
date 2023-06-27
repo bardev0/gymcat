@@ -52,11 +52,14 @@ async function grabExercic() {
 }
 
 async function addWorkout(workout: any) {
+	
+	console.log(workout)
+	
   const database = client.db("Cluester0");
   const col = database.collection("Workouts");
   const result = await col.insertOne(workout);
-
-  console.log(result);
+	
+  // console.log(result);
 }
 
 const logic = {
