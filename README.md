@@ -4,4 +4,4 @@
 
 # to-do's
 
-- zautomatyzowac build / save docker image
+-   zautomatyzowac build / save docker image

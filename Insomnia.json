@@ -1,1 +1,253 @@
-{"_type":"export","__export_format":4,"__export_date":"2023-06-27T11:10:12.616Z","__export_source":"insomnia.desktop.app:v2023.2.2","resources":[{"_id":"req_ae74db5a1ec24de2bb17e40b7064ca42","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1686574102099,"created":1686573796955,"url":"localhost:5001/addSpcificUserTemplateExercise","name":"addUserExc","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"user\": \"greg\",\n\t\"mg\": \"nogi\",\n\t\"e\": \"bulgarian split squdas\"\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1686573796955,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","parentId":null,"modified":1686574411311,"created":1671709347952,"name":"gymcat","description":"","scope":"collection","_type":"workspace"},{"_id":"req_53f271feeb5346d282ed3283a5085f2d","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1686574228997,"created":1686574183292,"url":"localhost:5001/addTemplateExercise","name":"addTmpExc","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"mg\": \"przedramiona\",\n\t\"e\": \"palm up curls\"\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1686573796905,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_98d088628b5d446e82c1cf2d1cdb2042","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1686574659056,"created":1686574644055,"url":"localhost:5001/exportExercices","name":"grabExercies","description":"","method":"POST","body":{"mimeType":"application/json","text":""},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1686573796855,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_dd4e11123bc948d9a03eafc75d51c2fb","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1687174310026,"created":1687174293679,"url":"localhost:5001/addLegacyWorkouts","name":"addLegacyWorkouts","description":"","method":"GET","body":{"mimeType":"application/json","text":""},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1686573796830,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_cac2d755b38b49a7a7fa93ba62148c1f","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1687861494334,"created":1687857616329,"url":"localhost:5001/validateUser","name":"validateUser","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"user\": \"ad\"\n}"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1686573796817.5,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_786fdc1ff0d242ee987416c4069ea95c","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1687096223981,"created":1687096193487,"url":"localhost:5001/addWorkout","name":"addWorkout","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"user\": \"greg\"\n}\n"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1686573796805,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"req_2617761c2e7643f99291dd0321751195","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1687864133129,"created":1687863669624,"url":"localhost:5001/retriveUserWorkouts","name":"retriveUserWorkouts","description":"","method":"POST","body":{"mimeType":"application/json","text":"{\n\t\"user\": \"greg\"\n}\n"},"parameters":[],"headers":[{"name":"Content-Type","value":"application/json"}],"authentication":{},"metaSortKey":-1686573796755,"isPrivate":false,"settingStoreCookies":true,"settingSendCookies":true,"settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingRebuildPath":true,"settingFollowRedirects":"global","_type":"request"},{"_id":"env_ac33ee84fdba8a8519cacf3d5f456e56f8285aba","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1671709347955,"created":1671709347955,"name":"Base Environment","data":{},"dataPropertyOrder":null,"color":null,"isPrivate":false,"metaSortKey":1671709347955,"_type":"environment"},{"_id":"jar_ac33ee84fdba8a8519cacf3d5f456e56f8285aba","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1671709347957,"created":1671709347957,"name":"Default Jar","cookies":[],"_type":"cookie_jar"},{"_id":"spc_1880557d48394be5b39e8c668c12436d","parentId":"wrk_a3fbf7e04cf44b34b08f18b970c50daa","modified":1671709347952,"created":1671709347952,"fileName":"My Collection","contents":"","contentType":"yaml","_type":"api_spec"},{"_id":"env_f18fb9ec4bec468aa55cc7c5a0776717","parentId":"env_ac33ee84fdba8a8519cacf3d5f456e56f8285aba","modified":1672402267607,"created":1672402267607,"name":"New Environment","data":{},"dataPropertyOrder":null,"color":null,"isPrivate":true,"metaSortKey":1672402267607,"_type":"environment"}]}
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-06-27T11:10:12.616Z",
+    "__export_source": "insomnia.desktop.app:v2023.2.2",
+    "resources": [
+        {
+            "_id": "req_ae74db5a1ec24de2bb17e40b7064ca42",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1686574102099,
+            "created": 1686573796955,
+            "url": "localhost:5001/addSpcificUserTemplateExercise",
+            "name": "addUserExc",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"user\": \"greg\",\n\t\"mg\": \"nogi\",\n\t\"e\": \"bulgarian split squdas\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1686573796955,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "parentId": null,
+            "modified": 1686574411311,
+            "created": 1671709347952,
+            "name": "gymcat",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_53f271feeb5346d282ed3283a5085f2d",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1686574228997,
+            "created": 1686574183292,
+            "url": "localhost:5001/addTemplateExercise",
+            "name": "addTmpExc",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"mg\": \"przedramiona\",\n\t\"e\": \"palm up curls\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1686573796905,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_98d088628b5d446e82c1cf2d1cdb2042",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1686574659056,
+            "created": 1686574644055,
+            "url": "localhost:5001/exportExercices",
+            "name": "grabExercies",
+            "description": "",
+            "method": "POST",
+            "body": { "mimeType": "application/json", "text": "" },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1686573796855,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_dd4e11123bc948d9a03eafc75d51c2fb",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1687174310026,
+            "created": 1687174293679,
+            "url": "localhost:5001/addLegacyWorkouts",
+            "name": "addLegacyWorkouts",
+            "description": "",
+            "method": "GET",
+            "body": { "mimeType": "application/json", "text": "" },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1686573796830,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_cac2d755b38b49a7a7fa93ba62148c1f",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1687861494334,
+            "created": 1687857616329,
+            "url": "localhost:5001/validateUser",
+            "name": "validateUser",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"user\": \"ad\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1686573796817.5,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_786fdc1ff0d242ee987416c4069ea95c",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1687096223981,
+            "created": 1687096193487,
+            "url": "localhost:5001/addWorkout",
+            "name": "addWorkout",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"user\": \"greg\"\n}\n"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1686573796805,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_2617761c2e7643f99291dd0321751195",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1687864133129,
+            "created": 1687863669624,
+            "url": "localhost:5001/retriveUserWorkouts",
+            "name": "retriveUserWorkouts",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"user\": \"greg\"\n}\n"
+            },
+            "parameters": [],
+            "headers": [
+                { "name": "Content-Type", "value": "application/json" }
+            ],
+            "authentication": {},
+            "metaSortKey": -1686573796755,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_ac33ee84fdba8a8519cacf3d5f456e56f8285aba",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1671709347955,
+            "created": 1671709347955,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1671709347955,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_ac33ee84fdba8a8519cacf3d5f456e56f8285aba",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1671709347957,
+            "created": 1671709347957,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "spc_1880557d48394be5b39e8c668c12436d",
+            "parentId": "wrk_a3fbf7e04cf44b34b08f18b970c50daa",
+            "modified": 1671709347952,
+            "created": 1671709347952,
+            "fileName": "My Collection",
+            "contents": "",
+            "contentType": "yaml",
+            "_type": "api_spec"
+        },
+        {
+            "_id": "env_f18fb9ec4bec468aa55cc7c5a0776717",
+            "parentId": "env_ac33ee84fdba8a8519cacf3d5f456e56f8285aba",
+            "modified": 1672402267607,
+            "created": 1672402267607,
+            "name": "New Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": true,
+            "metaSortKey": 1672402267607,
+            "_type": "environment"
+        }
+    ]
+}
