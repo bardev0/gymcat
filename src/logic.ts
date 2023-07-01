@@ -31,6 +31,19 @@ async function addTemplateExercise(args: TdbExercTemp) {
     console.log(result);
 }
 
+// add username for furure usage
+async function queryAllUserWorkouts() {
+    try {
+        const database = client.db("Cluester0");
+        const workouts = database.collection("Workouts2");
+        const query = { totalDay: { $gt: 2000 } };
+        const result = await workouts.find(query).toArray();
+
+        console.log(result);
+    } finally {
+    }
+}
+
 // async function grabExercic(agrs: TUser) {
 async function grabExercic() {
     let allE: any = [];
@@ -66,5 +79,6 @@ const logic = {
     addTemplateExercise,
     grabExercic,
     addWorkout,
+		queryAllUserWorkouts
 };
 export default logic;

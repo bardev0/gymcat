@@ -27,18 +27,6 @@ const routes = [
     "/validateUser",
     "/retriveUserWorkouts",
 ];
-// add username for furure usage
-async function queryAllUserWorkouts() {
-    try {
-        const database = client.db("Cluester0");
-        const workouts = database.collection("Workouts2");
-        const query = { totalDay: { $gt: 2000 } };
-        const result = await workouts.find(query).toArray();
-
-        console.log(result);
-    } finally {
-    }
-}
 async function validateUser(username: string) {
     const re = new RegExp(`${username}`);
     console.log(re);
@@ -214,7 +202,7 @@ app.get("/addLegacyWorkouts", (req: Request, res: Response) => {
 });
 
 app.get("/findWorkouts", (req: Request, res: Response) => {
-    queryAllUserWorkouts();
+    logic.queryAllUserWorkouts();
     res.send("ok");
 });
 
@@ -229,7 +217,7 @@ app.get("/testExport", async (req: Request, res: Response) => {
 //    console.log(`Server succesfully started on port : ${PORT} !`);
 // });
 
-export default app
+export default app;
 // export types to separate file and add them to this
 // add error when username exist when creating a new user
 //
