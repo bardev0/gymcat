@@ -1,5 +1,5 @@
 import * as fs from "fs";
-
+import { IRow } from "./types";
 
 
 function readCSV(path: string): string {
@@ -10,15 +10,6 @@ function readCSV(path: string): string {
 const pathCsv = "workouts_to_enter.csv";
 let csvFile = readCSV(pathCsv);
 
-interface IRow {
-    seriesNumber: number;
-    muscleGroup: string;
-    exerciseName: string;
-    exerciseMultiplier: number;
-    repetitions: number;
-    weight: number;
-    totalExercise: number;
-}
 
 class Row implements IRow {
     seriesNumber: number;
@@ -51,17 +42,6 @@ class Row implements IRow {
     }
 }
 
-interface IWorkout {
-    workoutOwner: string;
-    workoutNumber: number;
-    date: string;
-    timeStart: string;
-    timeEnd: string;
-    listOfRows: Array<IRow>;
-    totalDay: number | undefined;
-
-    addRows: Function;
-}
 
 class Workout implements IWorkout {
     workoutOwner: string;
