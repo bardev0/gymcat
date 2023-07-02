@@ -11,7 +11,6 @@ export interface IRow {
 
 export interface IWorkout {
     workoutOwner: string;
-    workoutNumber: number;
     date: string;
     timeStart: string;
     timeEnd: string;
