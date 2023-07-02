@@ -79,6 +79,6 @@ const logic = {
     addTemplateExercise,
     grabExercic,
     addWorkout,
-		queryAllUserWorkouts
+    queryAllUserWorkouts,
 };
 export default logic;
