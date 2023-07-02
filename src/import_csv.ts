@@ -1,8 +1,6 @@
 import * as fs from "fs";
 
-import { components } from "./api";
 
-type TRow = components["schemas"]["IRow"]
 
 function readCSV(path: string): string {
     const rawData = fs.readFileSync(path, { encoding: "utf8" });
@@ -22,7 +20,7 @@ interface IRow {
     totalExercise: number;
 }
 
-class Row implements TRow {
+class Row implements IRow {
     seriesNumber: number;
     muscleGroup: string;
     exerciseName: string;
@@ -59,7 +57,7 @@ interface IWorkout {
     date: string;
     timeStart: string;
     timeEnd: string;
-    listOfRows: Array<TRow>;
+    listOfRows: Array<IRow>;
     totalDay: number | undefined;
 
     addRows: Function;
@@ -71,7 +69,7 @@ class Workout implements IWorkout {
     date: string;
     timeStart: string;
     timeEnd: string;
-    listOfRows: Array<TRow>;
+    listOfRows: Array<IRow>;
     totalDay: number | undefined;
 
     constructor(
