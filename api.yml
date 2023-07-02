@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: Exercise Log API
+  version: 1.0.0
+components:
+  schemas:
+    IRow:
+      type: object
+      properties:
+        seriesNumber:
+          type: number
+        muscleGroup:
+          type: string
+        exerciseName:
+          type: string
+        exerciseMultiplier:
+          type: number
+        repetitions:
+          type: number
+        weight:
+          type: number
+        totalExercise:
+          type: number
+
