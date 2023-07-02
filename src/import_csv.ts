@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { IRow } from "./types";
-
+import { IWorkout } from "./types";
 
 function readCSV(path: string): string {
     const rawData = fs.readFileSync(path, { encoding: "utf8" });
