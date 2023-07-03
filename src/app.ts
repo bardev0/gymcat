@@ -83,14 +83,16 @@ app.post(routes[3], async (req: Request, res: Response) => {
     res.send(allUserWorkouts);
 });
 
+
 app.post(routes[0], (req: Request, res: Response) => {
     try {
         // console.log(req.body);
-        logic.addWorkout({
-            user: req.body.user,
-        });
+				console.log(req.body)
+        logic.addWorkout(
+					req.body
+                  );
     } finally {
-        res.json({ status: "ok" });
+        res.json({ status: "workout added" });
     }
 });
 

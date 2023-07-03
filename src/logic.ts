@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { IWorkout, IRow } from "./types";
 const uri =
     "mongodb+srv://greg1111:Rgbi5QPJQCck3eox@cluster0.nsckr5l.mongodb.net/Cluester0";
 const client = new MongoClient(uri);
@@ -64,7 +65,7 @@ async function grabExercic() {
     return allE;
 }
 
-async function addWorkout(workout: any) {
+async function addWorkout(workout: IWorkout) {
     console.log(workout);
 
     const database = client.db("Cluester0");
